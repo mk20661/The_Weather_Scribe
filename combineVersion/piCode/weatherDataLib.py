@@ -102,8 +102,7 @@ class WeatherGCodeWriter:
 
     def write_header_to_svg(self,svg_file="daily_header_a4.svg"):
         lines = [
-        f'DAILY CLIMATOLOGICAL SUMMARY for {datetime.date.today().strftime('%b %d, %Y')}'.center(100),
-        "ADDRESS: UCL East Campus".center(75)
+        f"DAILY CLIMATOLOGICAL SUMMARY for {datetime.date.today().strftime('%b %d, %Y')}".center(100)
         ]
 
         font_size = 25
