@@ -91,7 +91,7 @@ class WeatherGCodeWriter:
 
     def svg_to_gcode(self, svg_file="output.svg", gcode_file="output.gcode"):
         cargo_cmd = (
-            f"cargo run --manifest-path svg2gcode/Cargo.toml -- svgInput/{svg_file} "
+            f"cargo run --manifest-path ../svg2gcode/ -- ../svgInput/{svg_file} "
             f"--off M3 "
             f"--on M5 "
             f"--feedrate 2000 "
