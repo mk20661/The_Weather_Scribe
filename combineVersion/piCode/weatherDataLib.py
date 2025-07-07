@@ -60,7 +60,7 @@ class WeatherGCodeWriter:
         font_size = 15
 
         # Optional header
-        header_text = "TIME TEMP(°C) HUMIDITY(%) WIND(kph) RAIN(mm) eCO2(ppm) TVOC(ppb)"
+        header_text = "TIME TEMP(C) HUMIDITY(percent) WIND(kph) RAIN(mm) eCO2(ppm) TVOC(ppb)"
         header_svg = f"{svg_file_prefix}_header.svg"
         cmd = (
             f'vpype text -f futural -s {font_size} "{header_text}" '
