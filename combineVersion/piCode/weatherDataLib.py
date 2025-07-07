@@ -6,6 +6,9 @@ from datetime import datetime
 import board
 import busio
 import adafruit_sgp30
+import paho.mqtt.client as mqtt
+import mqttConfig as mqtt_config
+
 
 
 class WeatherGCodeWriter:
@@ -146,3 +149,40 @@ class WeatherGCodeWriter:
 
         gcode_file = "daily_report_header.gcode"
         self.svg_to_gcode(svg_file, gcode_file)
+
+    def on_connect(self,client, userdata, flags, rc):
+        if rc == 0:
+            print("MQTT Connected")
+            client.subscribe(mqtt_config.TOPIC)
+        else:
+            print("MQTT Connect failed with code", rc)
+
+    def on_message(self,client, userdata, msg):
+        print("Message received!")
+        try:
+            payload = msg.payload.decode()
+            print("[Payload]", payload)
+
+            data = json.loads(payload)
+
+            dt = datetime.fromtimestamp(float(data.get("dateTime", 0)))
+            entry = {
+                "time": f"{dt.strftime('%H:00')}",
+                "temp": float(data["outTemp_C"]),
+                "humidity": float(data["outHumidity"]),
+                "wind_high": float(data["windGust_kph"]),
+                "uv": float(data["UV"]),
+                "rain": float(data["dayRain_cm"]),
+                "pressure": float(data["pressure_mbar"]),
+            }
+
+
+            self.write_weather_data_to_svg([entry])
+
+            svg_file = "weather_data_line_0.svg"
+            self.svg_to_gcode(svg_file, f"{svg_file}.gcode")
+
+        except Exception as e:
+            print("Failed to process message:", e)
+        finally:
+            client.disconnect()
