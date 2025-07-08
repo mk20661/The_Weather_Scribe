@@ -67,7 +67,7 @@ class WeatherGCodeWriter:
             cmd = (
                 f'vpype text -f futural -s {font_size} "{text_line}" '
                 f'translate 10 {y} '
-                f'pagesize {self.canvas_width_mm}x{self.canvas_height_mm}mm write {temp_svg}'
+                f'pagesize {self.canvas_width_mm}x{self.canvas_height_mm}mm write ../svgInput/{temp_svg}'
             )
             subprocess.run(cmd, shell=True, check=True)
             return temp_svg
@@ -113,7 +113,7 @@ class WeatherGCodeWriter:
             f'vpype text -f futural -s 15 "{header_text}" '
             f'translate 20 250 '
             f'pagesize {canvas_width_mm}x{canvas_height_mm}mm '
-            f'write {temp_svg}'
+            f'write ../svgInput/{temp_svg}'
         )
         print("[vpype]", cmd)
         subprocess.run(cmd, shell=True, check=True)
