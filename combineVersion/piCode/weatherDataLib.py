@@ -14,7 +14,7 @@ import mqttConfig as mqtt_config
 class WeatherGCodeWriter:
     def __init__(self):
         self.canvas_width_mm = 210
-        self.canvas_height_mm = 297
+        self.canvas_height_mm = 200
 
         self.i2c = busio.I2C(board.SCL, board.SDA)
         self.sgp30 = None
@@ -23,13 +23,6 @@ class WeatherGCodeWriter:
 
         try:
             self.sgp30 = adafruit_sgp30.Adafruit_SGP30(self.i2c)
-            print("SGP30 serial number:", [hex(i) for i in self.sgp30.serial])
-
-            print("Warming up sensor for 15 seconds...")
-            for _ in range(15):
-                time.sleep(1)
-                print(".", end="", flush=True)
-            print("\nSGP30 initialized successfully.")
 
             self._start_air_quality_thread()
         except Exception as e:
@@ -59,16 +52,6 @@ class WeatherGCodeWriter:
     def write_weather_data_to_svg(self, data_entries, svg_file_prefix="weather_data", start_y=320, line_spacing=60):
         font_size = 15
 
-        # Optional header
-        header_text = "TIME TEMP(C) HUMIDITY(percent) WIND(kph) RAIN(mm) eCO2(ppm) TVOC(ppb)"
-        header_svg = f"{svg_file_prefix}_header.svg"
-        cmd = (
-            f'vpype text -f futural -s {font_size} "{header_text}" '
-            f'translate 10 {start_y - line_spacing} '
-            f'pagesize {self.canvas_width_mm}x{self.canvas_height_mm}mm write {header_svg}'
-        )
-        subprocess.run(cmd, shell=True, check=True)
-
         for i, entry in enumerate(data_entries):
             y = start_y + i * line_spacing
             text_line = "{:<6} {:>12} {:>18} {:>18} {:>8} {:>10} {:>10}".format(
@@ -97,7 +80,7 @@ class WeatherGCodeWriter:
             f"--feedrate 2000 "
             f"--begin $'M3 S90\\nG92 X0 Y0 Z0' "
             f"--end 'G0 X0 Y0 Z0' "
-            f"-o gcodeOut/{gcode_file}"
+            f"-o ../gcodeOut/{gcode_file}"
         )
         print("[cargo]", cargo_cmd)
         subprocess.run(cargo_cmd, shell=True, check=True)
@@ -109,9 +92,9 @@ class WeatherGCodeWriter:
         ]
 
         font_size = 25
-        line_spacing = 100
-        canvas_width_mm = 210
-        canvas_height_mm = 297
+        line_spacing = 50
+        canvas_width_mm = self.canvas_width_mm
+        canvas_height_mm = self.canvas_height_mm
         start_y = 50
 
         svg_parts = []
