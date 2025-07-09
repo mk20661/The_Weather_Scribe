@@ -3,10 +3,11 @@ from datetime import datetime
 from weatherDataLib import WeatherGCodeWriter, send_gcode_to_arduino, paperRoll
 
 writer = WeatherGCodeWriter()
+SerialPort="/dev/ttyACM0"  # Adjust this to your Arduino port
 
 def write_header():
     writer.write_header_to_svg()
-    send_gcode_to_arduino("daily_report_header.gcode")
+    send_gcode_to_arduino("daily_report_header.gcode",port=SerialPort)
     paperRoll(stepSize=5)
 
 def process_hourly_task():
@@ -37,7 +38,7 @@ def process_hourly_task():
             svg_file = writer.write_weather_data_to_svg([entry], svg_file_prefix="time_data")
             writer.svg_to_gcode(svg_file, "hourly_data.gcode")
             time.sleep(5 * 60)
-            send_gcode_to_arduino("hourly_data.gcode")
+            send_gcode_to_arduino("hourly_data.gcode", port=SerialPort)
             client.disconnect()
         except Exception as e:
             print("MQTT msg error:", e)
@@ -54,7 +55,7 @@ def main_loop():
     print("== Init ==")
     paperRoll(stepSize=20)
     writer.write_header_to_svg()
-    send_gcode_to_arduino("daily_report_header.gcode")
+    send_gcode_to_arduino("daily_report_header.gcode", port=SerialPort)
     paperRoll(stepSize=5)
 
     while True:
@@ -71,7 +72,7 @@ def main_loop():
             print("Advancing paper and writing header for new day")
             paperRoll(stepSize=20)
             writer.write_header_to_svg()
-            send_gcode_to_arduino("daily_report_header.gcode")
+            send_gcode_to_arduino("daily_report_header.gcode", port=SerialPort)
             paperRoll(stepSize=5)
 
 if __name__ == "__main__":
