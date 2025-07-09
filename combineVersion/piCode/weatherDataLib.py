@@ -154,6 +154,15 @@ class WeatherGCodeWriter:
         subprocess.run(cmd, shell=True, check=True)
         svg_parts.append(temp_svg)
 
+        merge_cmd = ["vpype"]
+        for svg in svg_parts:
+            merge_cmd += ["read", svg]
+        merge_cmd += ["write", svg_file]
+        print("[merge]", " ".join(merge_cmd))
+        subprocess.run(merge_cmd, check=True)
+
+        print(f"SVG written to: {svg_file}")
+
         gcode_file = "daily_report_header.gcode"
         self.svg_to_gcode(svg_file, gcode_file)
 
