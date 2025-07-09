@@ -3,12 +3,13 @@ from datetime import datetime
 from weatherDataLib import WeatherGCodeWriter, send_gcode_to_arduino, paperRoll
 
 writer = WeatherGCodeWriter()
-SerialPort="/dev/ttyACM0"  # Adjust this to your Arduino port
+SerialPort="/dev/ttyACM0"
 
 def write_header():
+    paperRoll(stepSize=20, port=SerialPort)
     writer.write_header_to_svg()
     send_gcode_to_arduino("daily_report_header.gcode",port=SerialPort)
-    paperRoll(stepSize=5)
+    paperRoll(stepSize=5, port=SerialPort)
 
 def process_hourly_task():
     import paho.mqtt.client as mqtt
@@ -53,10 +54,10 @@ def process_hourly_task():
 
 def main_loop():
     print("== Init ==")
-    paperRoll(stepSize=20)
+    paperRoll(stepSize=20, port=SerialPort)
     writer.write_header_to_svg()
     send_gcode_to_arduino("daily_report_header.gcode", port=SerialPort)
-    paperRoll(stepSize=5)
+    paperRoll(stepSize=5, port=SerialPort)
 
     while True:
         now = datetime.now()
@@ -70,10 +71,10 @@ def main_loop():
                 time.sleep(30)
 
             print("Advancing paper and writing header for new day")
-            paperRoll(stepSize=20)
+            paperRoll(stepSize=20, port=SerialPort)
             writer.write_header_to_svg()
             send_gcode_to_arduino("daily_report_header.gcode", port=SerialPort)
-            paperRoll(stepSize=5)
+            paperRoll(stepSize=5, port=SerialPort)
 
 if __name__ == "__main__":
     main_loop()
