@@ -34,7 +34,7 @@ class WeatherGCodeWriter:
 
             # Start background thread
             self._start_air_quality_thread()
-            
+
         except Exception as e:
             print("Failed to initialize SGP30 sensor:", e)
 
@@ -99,7 +99,7 @@ class WeatherGCodeWriter:
     def write_header_to_svg(self,svg_file="daily_header_a4.svg"):
         lines = [
         "DAILY WEATHER LOG".center(48),
-        f'{datetime.date.today().strftime('%B')} {datetime.date.today().day}, {datetime.date.today().year}'.center(40),
+        f"{datetime.date.today().strftime('%B')} {datetime.date.today().day} {datetime.date.today().year}".center(40),
         "UCL East".center(36)
     ]
 
