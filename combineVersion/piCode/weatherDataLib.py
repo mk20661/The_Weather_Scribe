@@ -73,7 +73,7 @@ class WeatherGCodeWriter:
                 f"{entry['eco2']:.0f}",
                 f"{entry['tvoc']:.0f}"
             )
-            temp_svg = f"{svg_file_prefix}_line_{i}.svg"
+            temp_svg = f"../svgInput/{svg_file_prefix}_line_{i}.svg"
             cmd = (
                 f'vpype text -f futural -s {font_size} "{text_line}" '
                 f'translate 10 {y} '
@@ -113,14 +113,14 @@ class WeatherGCodeWriter:
 
         for i, line in enumerate(lines):
             y = start_y + i * line_spacing
-            temp_svg = f"header_line_{i}.svg"
+            temp_svg = f"../svgInput/header_line_{i}.svg"
             cmd = f"""vpype text -f futural -s {font_size} -a center "{line}" translate 30 {y} pagesize {canvas_width_mm}x{canvas_height_mm}mm write {temp_svg}"""
             print("[vpype]", cmd)
             subprocess.run(cmd, shell=True, check=True)
             svg_parts.append(temp_svg)
 
         header_text = 'TIME I TEMPERATURES I HUMIDITY I  WIND  I RAIN I ECO2 I TVOC '
-        temp_svg = "header_line_3.svg"
+        temp_svg = "../svgInput/header_line_3.svg"
         cmd = (
             f'vpype text -f futural -s 26 "{header_text}" '
             f'translate 0 170 '
@@ -132,7 +132,7 @@ class WeatherGCodeWriter:
         svg_parts.append(temp_svg)
 
         header_text_unit = '     I       C         I percent  I  KM/H I MM  I PPM I PPB'
-        temp_svg = "header_unit.svg"
+        temp_svg = "../svgInput/header_unit.svg"
         cmd = (
             f'vpype text -f futural -s 26 "{header_text_unit}" '
             f'translate 0 200 '
@@ -145,7 +145,7 @@ class WeatherGCodeWriter:
         
         x1, y1 = 20, 220
         x2, y2 = 810, 220
-        temp_svg = "line.svg"
+        temp_svg = "../svgInput/line.svg"
         cmd = (
             f'vpype line {x1} {y1} {x2} {y2} '
             f'pagesize {canvas_width_mm}x{canvas_height_mm}mm write {temp_svg}'
