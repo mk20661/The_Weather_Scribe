@@ -14,8 +14,8 @@ import serial
 
 class WeatherGCodeWriter:
     def __init__(self):
-        self.canvas_width_mm = 210
-        self.canvas_height_mm = 200
+        self.canvas_width_mm = 250
+        self.canvas_height_mm = 220
 
         self.i2c = busio.I2C(board.SCL, board.SDA)
         self.sgp30 = None
@@ -24,8 +24,17 @@ class WeatherGCodeWriter:
 
         try:
             self.sgp30 = adafruit_sgp30.Adafruit_SGP30(self.i2c)
+            print("SGP30 serial:", [hex(i) for i in self.sgp30.serial])
 
+            print("Warming up sensor for 15 seconds...")
+            for _ in range(15):
+                time.sleep(1)
+                print(".", end="", flush=True)
+            print("\nSensor ready.")
+
+            # Start background thread
             self._start_air_quality_thread()
+            
         except Exception as e:
             print("Failed to initialize SGP30 sensor:", e)
 
@@ -78,7 +87,7 @@ class WeatherGCodeWriter:
             f"cargo run --manifest-path ../svg2gcode/Cargo.toml -- ../svgInput/{svg_file} "
             f"--off M3 "
             f"--on M5 "
-            f"--feedrate 2000 "
+            f"--feedrate 5000 "
             f"--begin 'M3 S90\nG92 X0 Y0 Z0' "
             f"--end 'G0 X0 Y0 Z0' "
             f"-o ../gcodeOut/{gcode_file}"
@@ -89,39 +98,53 @@ class WeatherGCodeWriter:
 
     def write_header_to_svg(self,svg_file="daily_header_a4.svg"):
         lines = [
-        f"DAILY CLIMATOLOGICAL SUMMARY for {datetime.date.today().strftime('%b %d, %Y')}".center(100)
-        ]
+        "DAILY WEATHER LOG".center(48),
+        f'{datetime.date.today().strftime('%B')} {datetime.date.today().day}, {datetime.date.today().year}'.center(40),
+        "UCL East".center(36)
+    ]
 
-        font_size = 25
+        font_size = 50
         line_spacing = 50
         canvas_width_mm = self.canvas_width_mm
         canvas_height_mm = self.canvas_height_mm
-        start_y = 50
+        start_y = 30
 
         svg_parts = []
 
         for i, line in enumerate(lines):
             y = start_y + i * line_spacing
             temp_svg = f"header_line_{i}.svg"
-            cmd = f"""vpype text -f futural -s {font_size} -a center "{line}" translate 50 {y} pagesize {canvas_width_mm}x{canvas_height_mm}mm write {temp_svg}"""
+            cmd = f"""vpype text -f futural -s {font_size} -a center "{line}" translate 30 {y} pagesize {canvas_width_mm}x{canvas_height_mm}mm write {temp_svg}"""
             print("[vpype]", cmd)
             subprocess.run(cmd, shell=True, check=True)
             svg_parts.append(temp_svg)
 
-        header_text = 'TIME I TEMPERATURES(C) I HUMIDITY (percent) I  WIND (km/h) I RAIN (mm) I eco2(ppm) I TVOC(ppb)'
-        temp_svg = "header_line_2.svg"
+        header_text = 'TIME I TEMPERATURES I HUMIDITY I  WIND  I RAIN I ECO2 I TVOC '
+        temp_svg = "header_line_3.svg"
         cmd = (
-            f'vpype text -f futural -s 15 "{header_text}" '
-            f'translate 20 250 '
+            f'vpype text -f futural -s 26 "{header_text}" '
+            f'translate 0 170 '
             f'pagesize {canvas_width_mm}x{canvas_height_mm}mm '
-            f'write ../svgInput/{temp_svg}'
+            f'write {temp_svg}'
         )
         print("[vpype]", cmd)
         subprocess.run(cmd, shell=True, check=True)
         svg_parts.append(temp_svg)
 
-        x1, y1 = 20, 260
-        x2, y2 = 800, 260
+        header_text_unit = '     I       C         I percent  I  KM/H I MM  I PPM I PPB'
+        temp_svg = "header_unit.svg"
+        cmd = (
+            f'vpype text -f futural -s 26 "{header_text_unit}" '
+            f'translate 0 200 '
+            f'pagesize {canvas_width_mm}x{canvas_height_mm}mm '
+            f'write {temp_svg}'
+        )
+        print("[vpype]", cmd)
+        subprocess.run(cmd, shell=True, check=True)
+        svg_parts.append(temp_svg)
+        
+        x1, y1 = 20, 220
+        x2, y2 = 810, 220
         temp_svg = "line.svg"
         cmd = (
             f'vpype line {x1} {y1} {x2} {y2} '
@@ -140,36 +163,6 @@ class WeatherGCodeWriter:
             client.subscribe(mqtt_config.TOPIC)
         else:
             print("MQTT Connect failed with code", rc)
-
-    def on_message(self,client, userdata, msg):
-        print("Message received!")
-        try:
-            payload = msg.payload.decode()
-            print("[Payload]", payload)
-
-            data = json.loads(payload)
-
-            dt = datetime.fromtimestamp(float(data.get("dateTime", 0)))
-            entry = {
-                "time": f"{dt.strftime('%H:00')}",
-                "temp": float(data["outTemp_C"]),
-                "humidity": float(data["outHumidity"]),
-                "wind_high": float(data["windGust_kph"]),
-                "uv": float(data["UV"]),
-                "rain": float(data["dayRain_cm"]),
-                "pressure": float(data["pressure_mbar"]),
-            }
-
-
-            self.write_weather_data_to_svg([entry])
-
-            svg_file = "weather_data_line_0.svg"
-            self.svg_to_gcode(svg_file, f"{svg_file}.gcode")
-
-        except Exception as e:
-            print("Failed to process message:", e)
-        finally:
-            client.disconnect()
 
 def send_gcode_to_arduino(gcode_file, port='/dev/tty.usbmodem1201', baudrate=115200):
     try:

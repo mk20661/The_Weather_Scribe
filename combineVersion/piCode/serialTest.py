@@ -69,5 +69,5 @@ def paperRoll(stepSize=20, port="/dev/tty.usbmodem1201", baudrate=115200):
             print("Serial connection closed.")
 
 # 使用方法（举例）
-send_gcode_to_arduino("daily_report_header_copy.gcode", port="/dev/tty.usbmodem21201")
-#paperRoll(stepSize=20, port="/dev/tty.usbmodem21201", baudrate=115200)
+send_gcode_to_arduino("daily_report_header.gcode", port="/dev/ttyACM0")
+#paperRoll(stepSize=20, port="/dev/ttyACM0", baudrate=115200)

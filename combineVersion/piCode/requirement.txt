@@ -4,3 +4,4 @@ borad
 adafruit-circuitpython-sgp30
 paho-mqtt
 vpype
+serial
