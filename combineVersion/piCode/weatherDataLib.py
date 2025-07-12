@@ -14,7 +14,7 @@ from adafruit_pm25.uart import PM25_UART
 
 class WeatherGCodeWriter:
     def __init__(self):
-        self.canvas_width_mm = 252
+        self.canvas_width_mm = 260
         self.canvas_height_mm = 220
 
         #update eco2
