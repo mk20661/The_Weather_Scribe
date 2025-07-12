@@ -61,7 +61,7 @@ class WeatherGCodeWriter:
                         print(f"[SGP30] eCO2={self.latest_eco2} ppm")
                     if self.pm25:
                         pm_data = self.pm25.read()
-                        self.latest_pm25 = pm_data.pm25_standard
+                        self.latest_pm25 = float(pm_data["pm25 standard"])
                         print(f"[PM2.5] PM2.5={self.latest_pm25} µg/m³")
                 except Exception as e:
                     print("SGP30 read error:", e)
