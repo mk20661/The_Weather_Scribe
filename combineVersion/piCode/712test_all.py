@@ -43,7 +43,7 @@ def init_header():
     print("Initializing header")
     paperRoll(stepSize=20, port=PORT)
     writer.write_header_to_svg()
-    send_gcode_to_arduino("daily_report_header.gcode", port=PORT)
+    send_gcode_to_arduino("../gcodeOut/daily_report_header.gcode", port=PORT)
     paperRoll(stepSize=5, port=PORT)
 
 def run_hourly_task():
