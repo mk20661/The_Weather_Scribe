@@ -34,10 +34,10 @@ def process_hourly_task():
                 "wind_high": float(data["windGust_kph"]),
                 "rain": float(data["dayRain_cm"]),
                 "eco2": writer.latest_eco2,
-                "tvoc": writer.latest_tvoc
+                "pm25": writer.latest_pm25 
             }
             svg_file = writer.write_weather_data_to_svg([entry], svg_file_prefix="time_data")
-            writer.svg_to_gcode(svg_file, "hourly_data.gcode")
+            writer.svg_to_gcode(svg_file, "../hourly_data.gcode")
             time.sleep(5 * 60)
             send_gcode_to_arduino("hourly_data.gcode", port=SerialPort)
             client.disconnect()

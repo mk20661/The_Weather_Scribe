@@ -5,3 +5,4 @@ adafruit-circuitpython-sgp30
 paho-mqtt
 vpype
 serial
+pip install adafruit-circuitpython-pm25
