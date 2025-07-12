@@ -2,7 +2,7 @@ import threading
 import subprocess
 import json
 import time
-from datetime import datetime
+import datetime
 import board
 import busio
 import adafruit_sgp30
@@ -64,7 +64,7 @@ class WeatherGCodeWriter:
                         self.latest_pm25 = float(pm_data["pm25 standard"])
                         print(f"[PM2.5] PM2.5={self.latest_pm25} µg/m³")
                 except Exception as e:
-                    print("SGP30 read error:", e)
+                    print("sensor read error:", e)
                 time.sleep(1)
 
         thread = threading.Thread(target=update_loop, daemon=True)
