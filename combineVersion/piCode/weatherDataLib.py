@@ -2,7 +2,7 @@ import threading
 import subprocess
 import json
 import time
-import datetime
+from datetime import datetime
 import board
 import busio
 import adafruit_sgp30
