@@ -90,7 +90,7 @@ class WeatherGCodeWriter:
                 f"{entry['eco2']:.0f}",
                 f"{entry['pm25']:.0f}"
             )
-        temp_svg = f"../svgInput/{svg_file_prefix}{datetime.date.now().hour}.svg"
+        temp_svg = f"../svgInput/{svg_file_prefix}{datetime.datetime.date.now().hour}.svg"
         cmd = (
             f'vpype text -f futural -s {font_size} "{text_line}" '
             f'translate 5 {y} '
