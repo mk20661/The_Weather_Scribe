@@ -180,7 +180,7 @@ class WeatherGCodeWriter:
 
         print(f"SVG written to: {svg_file}")
 
-        gcode_file = "daily_report_header.gcode"
+        gcode_file = "../gcodeOut/daily_report_header.gcode"
         self.svg_to_gcode(svg_file, gcode_file)
 
 def send_gcode_to_arduino(gcode_file, port='/dev/tty.usbmodem1201', baudrate=115200):
