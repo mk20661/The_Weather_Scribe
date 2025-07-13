@@ -110,7 +110,6 @@ class WeatherGCodeWriter:
             f'pagesize {self.canvas_width_mm}x{self.canvas_height_mm}mm write ../svgInput/{temp_svg}'
         )
         subprocess.run(cmd, shell=True, check=True)
-        return temp_svg
 
     def svg_to_gcode(self, svg_file="output.svg", gcode_file="output.gcode"):
         cargo_cmd = (
