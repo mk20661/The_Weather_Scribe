@@ -44,9 +44,10 @@ def init_header(date_override=None):
         header_date = datetime.date.today()
     else:
         header_date = date_override
+    header_text = header_date.strftime("%b %d, %Y")
     print("Initializing header")
     paperRoll(stepSize=20, port=PORT)
-    writer.write_header_to_svg()
+    writer.write_header_to_svg(datetimeInput=header_text)
     send_gcode_to_arduino("../gcodeOut/daily_report_header.gcode", port=PORT)
     paperRoll(stepSize=5, port=PORT)
 

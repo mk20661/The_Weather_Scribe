@@ -130,12 +130,10 @@ class WeatherGCodeWriter:
         subprocess.run(cargo_cmd, shell=True, check=True)
         print(f"G-code saved to {gcode_file}")
 
-    def write_header_to_svg(self,svg_file="../svgInput/daily_header.svg"):
-        self.base_hour = datetime.datetime.now().hour
-        self.last_header_date = datetime.date.today()
+    def write_header_to_svg(self,datetimeInput,svg_file="../svgInput/daily_header.svg"):
         lines = [
         "DAILY WEATHER LOG".center(48),
-        f"{datetime.date.today().strftime('%B')} {datetime.date.today().day} {datetime.date.today().year}".center(40),
+        f"{datetimeInput.strftime('%B')} {datetimeInput.day} {datetimeInput.year}".center(40),
         "UCL East".center(36)
     ]
 
