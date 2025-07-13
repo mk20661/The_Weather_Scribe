@@ -79,7 +79,7 @@ class WeatherGCodeWriter:
             "pm25": self.latest_pm25
         }
 
-    def write_weather_data_to_svg(self, data_entries, svg_file_prefix="weather_data_time_", start_y=240, line_spacing=20):
+    def write_weather_data_to_svg(self, data_entries, svg_file_prefix="weather_data_time_", start_y=20, line_spacing=35):
         font_size = 24
         now = datetime.datetime.now()
 
