@@ -15,7 +15,7 @@ from adafruit_pm25.uart import PM25_UART
 class WeatherGCodeWriter:
     def __init__(self):
         self.canvas_width_mm = 245
-        self.canvas_height_mm = 225
+        self.canvas_height_mm = 230
 
         self.base_hour = None 
         self.last_header_date = None
@@ -163,7 +163,7 @@ class WeatherGCodeWriter:
         subprocess.run(cmd, shell=True, check=True)
         svg_parts.append(temp_svg)
 
-        header_text_unit = '     I       C         I percent  I  KM/H I MM   I PPM  I µg/m³'
+        header_text_unit = '     I       C         I percent  I  KM/H I MM   I PPM  I ug/m³'
         temp_svg = "../svgInput/header_unit.svg"
         cmd = (
             f'vpype text -f futural -s 26 "{header_text_unit}" '
