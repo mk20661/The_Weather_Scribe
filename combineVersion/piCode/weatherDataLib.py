@@ -131,7 +131,7 @@ class WeatherGCodeWriter:
         print(f"G-code saved to {gcode_file}")
 
     def write_header_to_svg(self,svg_file="../svgInput/daily_header.svg"):
-        self.base_hour = 0
+        self.base_hour = datetime.datetime.now().hour
         self.last_header_date = datetime.date.today()
         lines = [
         "DAILY WEATHER LOG".center(48),
