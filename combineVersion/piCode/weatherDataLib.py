@@ -94,7 +94,7 @@ class WeatherGCodeWriter:
         y = start_y + relative_hour * line_spacing
         for i, entry in enumerate(data_entries):
             y = start_y + i * line_spacing
-            text_line = "{:<0} {:>12} {:>18} {:>12} {:>9} {:>8} {:>7}".format(
+            text_line = "{:<0} {:>12} {:>10} {:>12} {:>7} {:>6} {:>5}".format(
                 entry['time'],
                 f"{entry['temp']:.1f}",
                 f"{entry['humidity']}",
