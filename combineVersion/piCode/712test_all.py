@@ -39,7 +39,11 @@ def on_message(client, userdata, msg):
     except Exception as e:
         print("Failed to parse MQTT data:", e)
 
-def init_header():
+def init_header(date_override=None):
+    if date_override is None:
+        header_date = datetime.date.today()
+    else:
+        header_date = date_override
     print("Initializing header")
     paperRoll(stepSize=20, port=PORT)
     writer.write_header_to_svg()

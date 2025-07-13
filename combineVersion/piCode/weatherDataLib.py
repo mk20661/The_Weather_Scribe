@@ -118,13 +118,13 @@ class WeatherGCodeWriter:
 
     def svg_to_gcode(self, svg_file="output.svg", gcode_file="output.gcode"):
         cargo_cmd = (
-            f"cargo run --manifest-path ../svg2gcode/Cargo.toml -- ../svgInput/{svg_file} "
-            f"--off M3 "
-            f"--on M5 "
-            f"--feedrate 3000 "
-            f"--begin 'M3 S90\nG92 X0 Y0 Z0' "
-            f"--end 'G1 X0 Y0 Z0 F3000' "
-            f"-o ../gcodeOut/{gcode_file}"
+            "cargo", "run", "--manifest-path", "../svg2gcode/Cargo.toml", "--", svg_file,
+            "--off", "M3",
+            "--on", "M5",
+            "--feedrate", "3000",
+            "--begin", "M3 S90\nG92 X0 Y0 Z0",
+            "--end", "G1 X0 Y0 Z0 F3000",
+            "-o", f"../gcodeOut/{gcode_file}"
         )
         print("[cargo]", cargo_cmd)
         subprocess.run(cargo_cmd, shell=True, check=True)
