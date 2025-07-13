@@ -109,6 +109,9 @@ class WeatherGCodeWriter:
             f'translate 5 {y} '
             f'pagesize {self.canvas_width_mm}x{self.canvas_height_mm}mm write ../svgInput/{temp_svg}'
         )
+
+        with open("vpype_log.txt", "a") as log_file:
+            log_file.write(f"[{datetime.datetime.now()}] {cmd}\n")
         subprocess.run(cmd, shell=True, check=True)
 
     def svg_to_gcode(self, svg_file="output.svg", gcode_file="output.gcode"):
