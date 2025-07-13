@@ -88,7 +88,7 @@ class WeatherGCodeWriter:
             self.base_hour = now.hour
             self.last_header_date = datetime.date.today()
 
-        relative_hour = now.hour - self.base_hour-1
+        relative_hour = now.hour - self.base_hour
         if relative_hour < 0:
             relative_hour += 24
 
