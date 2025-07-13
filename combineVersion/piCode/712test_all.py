@@ -80,6 +80,7 @@ def run_hourly_task():
         print("MQTT data not received")
 
 def main_loop():
+    run_hourly_task()
     print("Starting daily loop")
     init_header()
     last_hour = -1

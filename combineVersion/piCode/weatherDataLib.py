@@ -243,8 +243,8 @@ def paperRoll(stepSize=20, port="/dev/tty.usbmodem1201", baudrate=115200):
         ser.reset_input_buffer()
 
         commands = [
-            f"G0 Z{stepSize} F3000",
-            "G92 Z0 F3000"
+            f"G1 Z{stepSize} F3000",
+            "G92 Z0"
         ]
 
         for cmd in commands:
