@@ -71,11 +71,12 @@ def run_hourly_task():
         writer.svg_to_gcode(svg_file=os.path.basename(svg_path), gcode_file=gcode_filename)
         print("Waiting 5 seconds before sending G-code")
         time.sleep(5)
-        send_gcode_to_arduino(gcode_filename, port=PORT)
+        send_gcode_to_arduino(f'../gcodeOut/{gcode_filename}', port=PORT)
     else:
         print("MQTT data not received")
 
 def main_loop():
+    run_hourly_task()
     print("Starting daily loop")
     init_header()
     last_hour = -1
