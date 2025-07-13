@@ -220,7 +220,7 @@ def send_gcode_to_arduino(gcode_file, port='/dev/tty.usbmodem1201', baudrate=115
                 resp_bytes = ser.readline()
                 if not resp_bytes:
                     timeout_counter += 1
-                    if timeout_counter > 120:
+                    if timeout_counter > 5:
                         print("timeout waiting for OK from Arduino.")
                         break  # or `raise` if you want to abort
                     continue
