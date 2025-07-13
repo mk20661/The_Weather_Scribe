@@ -123,7 +123,7 @@ class WeatherGCodeWriter:
             f"--on M5 "
             f"--feedrate 3000 "
             f"--begin 'M3 S90\nG92 X0 Y0 Z0' "
-            f"--end 'G0 X0 Y0 Z0' "
+            f"--end 'G1 X0 Y0 Z0 F3000' "
             f"-o ../gcodeOut/{gcode_file}"
         )
         print("[cargo]", cargo_cmd)
@@ -167,7 +167,7 @@ class WeatherGCodeWriter:
         subprocess.run(cmd, shell=True, check=True)
         svg_parts.append(temp_svg)
 
-        header_text_unit = '     I       C         I percent  I  KM/H I MM   I PPM  I ug/m³'
+        header_text_unit = '     I       C         I percent  I  KM/H I MM   I PPM  I ug/m3'
         temp_svg = "../svgInput/header_unit.svg"
         cmd = (
             f'vpype text -f futural -s 26 "{header_text_unit}" '
