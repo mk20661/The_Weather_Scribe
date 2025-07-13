@@ -44,10 +44,9 @@ def init_header(date_override=None):
         header_date = datetime.date.today()
     else:
         header_date = date_override
-    header_text = header_date.strftime("%b %d, %Y")
     print("Initializing header")
     paperRoll(stepSize=20, port=PORT)
-    writer.write_header_to_svg(datetimeInput=header_text)
+    writer.write_header_to_svg(datetimeInput=header_date)
     send_gcode_to_arduino("../gcodeOut/daily_report_header.gcode", port=PORT)
     paperRoll(stepSize=5, port=PORT)
 
@@ -98,7 +97,8 @@ def main_loop():
 
         if hour == 23 and minute >= 40 and not daily_reset_done:
             print("23:50 reached, writing new header")
-            init_header()
+            tomorrow = now + datetime.timedelta(days=1)
+            init_header(date_override=tomorrow.date())
             daily_reset_done = True
 
         if hour == 0 and minute < 50:
