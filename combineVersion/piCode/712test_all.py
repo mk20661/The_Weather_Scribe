@@ -80,7 +80,7 @@ def run_hourly_task():
         print("MQTT data not received")
 
 def main_loop():
-    run_hourly_task()
+    
     print("Starting daily loop")
     init_header()
     last_hour = -1
@@ -96,7 +96,7 @@ def main_loop():
             run_hourly_task()
             last_hour = hour
 
-        if hour == 23 and minute >= 40 and not daily_reset_done:
+        if hour == 23 and minute >= 50 and not daily_reset_done:
             print("23:50 reached, writing new header")
             tomorrow = now + datetime.timedelta(days=1)
             init_header(date_override=tomorrow.date())
