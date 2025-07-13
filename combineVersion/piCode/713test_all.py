@@ -40,13 +40,14 @@ def on_message(client, userdata, msg):
         print("Failed to parse MQTT data:", e)
 
 def init_header():
+    run_hourly_task()
     print("Initializing header")
     paperRoll(stepSize=20, port=PORT)
     writer.write_header_to_svg()
     send_gcode_to_arduino("../gcodeOut/daily_report_header.gcode", port=PORT)
     paperRoll(stepSize=5, port=PORT)
 
-    run_hourly_task()
+    
 
 def run_hourly_task():
     global mqtt_data_entry, mqtt_received
