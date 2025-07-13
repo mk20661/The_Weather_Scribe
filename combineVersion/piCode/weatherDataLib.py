@@ -17,8 +17,8 @@ class WeatherGCodeWriter:
         self.canvas_width_mm = 245
         self.canvas_height_mm = 230
 
-        self.base_hour = None 
-        self.last_header_date = None
+        self.base_hour = datetime.datetime.now().hour 
+        self.last_header_date = datetime.date.today()
 
         #update eco2
         self.i2c = busio.I2C(board.SCL, board.SDA)
