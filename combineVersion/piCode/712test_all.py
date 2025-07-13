@@ -91,7 +91,7 @@ def main_loop():
             run_hourly_task()
             last_hour = hour
 
-        if hour == 23 and minute >= 45 and not daily_reset_done:
+        if hour == 23 and minute >= 40 and not daily_reset_done:
             print("23:50 reached, writing new header")
             init_header()
             daily_reset_done = True
