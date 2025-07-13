@@ -15,7 +15,10 @@ from adafruit_pm25.uart import PM25_UART
 class WeatherGCodeWriter:
     def __init__(self):
         self.canvas_width_mm = 260
-        self.canvas_height_mm = 220
+        self.canvas_height_mm = 245
+
+        self.base_hour = None 
+        self.last_header_date = None
 
         #update eco2
         self.i2c = busio.I2C(board.SCL, board.SDA)
@@ -76,9 +79,19 @@ class WeatherGCodeWriter:
             "pm25": self.latest_pm25
         }
 
-    def write_weather_data_to_svg(self, data_entries, svg_file_prefix="weather_data_time_", start_y=320, line_spacing=60):
+    def write_weather_data_to_svg(self, data_entries, svg_file_prefix="weather_data_time_", start_y=10, line_spacing=20):
         font_size = 24
+        now = datetime.datetime.now()
 
+        if self.last_header_date != datetime.date.today():
+            self.base_hour = now.hour
+            self.last_header_date = datetime.date.today()
+
+        relative_hour = now.hour - self.base_hour
+        if relative_hour < 0:
+            relative_hour += 24
+
+        y = start_y + relative_hour * line_spacing
         for i, entry in enumerate(data_entries):
             y = start_y + i * line_spacing
             text_line = "{:<0} {:>12} {:>18} {:>12} {:>9} {:>8} {:>7}".format(
@@ -114,6 +127,8 @@ class WeatherGCodeWriter:
         print(f"G-code saved to {gcode_file}")
 
     def write_header_to_svg(self,svg_file="../svgInput/daily_header.svg"):
+        self.base_hour = 0
+        self.last_header_date = datetime.date.today()
         lines = [
         "DAILY WEATHER LOG".center(48),
         f"{datetime.date.today().strftime('%B')} {datetime.date.today().day} {datetime.date.today().year}".center(40),
@@ -226,8 +241,8 @@ def paperRoll(stepSize=20, port="/dev/tty.usbmodem1201", baudrate=115200):
         ser.reset_input_buffer()
 
         commands = [
-            f"G0 Z{stepSize}",
-            "G92 Z0"
+            f"G0 Z{stepSize} F3000",
+            "G92 Z0 F3000"
         ]
 
         for cmd in commands:
