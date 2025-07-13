@@ -40,6 +40,7 @@ def on_message(client, userdata, msg):
         print("Failed to parse MQTT data:", e)
 
 def init_header():
+    run_hourly_task()
     print("Initializing header")
     paperRoll(stepSize=20, port=PORT)
     writer.write_header_to_svg()

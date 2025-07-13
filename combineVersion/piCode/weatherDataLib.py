@@ -113,6 +113,7 @@ class WeatherGCodeWriter:
         with open("vpype_log.txt", "a") as log_file:
             log_file.write(f"[{datetime.datetime.now()}] {cmd}\n")
         subprocess.run(cmd, shell=True, check=True)
+        return temp_svg
 
     def svg_to_gcode(self, svg_file="output.svg", gcode_file="output.gcode"):
         cargo_cmd = (
