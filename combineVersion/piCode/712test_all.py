@@ -80,6 +80,7 @@ def main_loop():
     init_header()
     last_hour = -1
     daily_reset_done = False
+    run_hourly_task()
 
     while True:
         now = datetime.datetime.now()

@@ -19,6 +19,7 @@ class WeatherGCodeWriter:
 
         self.base_hour = datetime.datetime.now().hour 
         self.last_header_date = datetime.date.today()
+        print(f"Base hour set to: {self.base_hour}, Last header date: {self.last_header_date}")
 
         #update eco2
         self.i2c = busio.I2C(board.SCL, board.SDA)
@@ -87,7 +88,7 @@ class WeatherGCodeWriter:
             self.base_hour = now.hour
             self.last_header_date = datetime.date.today()
 
-        relative_hour = now.hour - self.base_hour
+        relative_hour = now.hour - self.base_hour-1
         if relative_hour < 0:
             relative_hour += 24
 
