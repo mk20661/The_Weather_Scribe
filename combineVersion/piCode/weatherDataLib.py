@@ -207,6 +207,14 @@ def send_gcode_to_arduino(gcode_file, port='/dev/tty.usbmodem1201', baudrate=115
 
         ser.reset_input_buffer()
 
+        ser.write("$H\n".encode())
+        while True:
+            response = ser.readline().decode().strip()
+            if response:
+                print(f"<<< Received: {response}")
+            if "ok" in response.lower():
+                break
+            
         with open(gcode_file, 'r') as f:
             lines = f.readlines()
 
@@ -243,6 +251,7 @@ def paperRoll(stepSize=20, port="/dev/tty.usbmodem1201", baudrate=115200):
         ser.reset_input_buffer()
 
         commands = [
+            "$H",
             f"G1 Z{stepSize} F3000",
             "G92 Z0"
         ]
