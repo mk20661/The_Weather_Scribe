@@ -13,7 +13,7 @@ from adafruit_pm25.uart import PM25_UART
 
 
 class WeatherGCodeWriter:
-    def __init__(self):
+    def __init__(self, port="/dev/ttyACM0"):
         self.canvas_width_mm = 245
         self.canvas_height_mm = 230
 
@@ -55,6 +55,8 @@ class WeatherGCodeWriter:
 
         # Start background thread
         self._start_air_quality_thread()
+        init_devices(port=port, baudrate=115200)
+
 
     def _start_air_quality_thread(self):
         def update_loop():
@@ -214,7 +216,7 @@ def send_gcode_to_arduino(gcode_file, port='/dev/tty.usbmodem1201', baudrate=115
                 print(f"<<< Received: {response}")
             if "ok" in response.lower():
                 break
-            
+
         with open(gcode_file, 'r') as f:
             lines = f.readlines()
 
@@ -268,6 +270,37 @@ def paperRoll(stepSize=20, port="/dev/tty.usbmodem1201", baudrate=115200):
                     break
 
         print("paperRoll complete")
+
+    except serial.SerialException as e:
+        print("Serial error:", e)
+    finally:
+        if 'ser' in locals() and ser.is_open:
+            ser.close()
+            print("Serial connection closed.")
+
+def init_devices(port="/dev/tty.usbmodem1201", baudrate=115200):
+    try:
+        ser = serial.Serial(port, baudrate, timeout=2)
+        time.sleep(2)
+        ser.reset_input_buffer()
+
+        commands = [
+            "$H",
+            "M3 S90",  # Set spindle speed
+        ]
+
+        for cmd in commands:
+            print(f">>> Sending: {cmd}")
+            ser.write((cmd + "\n").encode())
+
+            while True:
+                response = ser.readline().decode().strip()
+                if response:
+                    print(f"<<< Received: {response}")
+                if "ok" in response.lower():
+                    break
+
+        print("Initialization device complete")
 
     except serial.SerialException as e:
         print("Serial error:", e)
