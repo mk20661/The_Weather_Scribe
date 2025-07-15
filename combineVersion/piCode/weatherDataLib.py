@@ -209,13 +209,8 @@ def send_gcode_to_arduino(gcode_file, port='/dev/tty.usbmodem1201', baudrate=115
 
         ser.reset_input_buffer()
 
-        ser.write("$H\n".encode())
-        while True:
-            response = ser.readline().decode().strip()
-            if response:
-                print(f"<<< Received: {response}")
-            if "ok" in response.lower():
-                break
+        if not homing_until_success(ser):
+            return
 
         with open(gcode_file, 'r') as f:
             lines = f.readlines()
@@ -252,8 +247,10 @@ def paperRoll(stepSize=20, port="/dev/tty.usbmodem1201", baudrate=115200):
         time.sleep(2)
         ser.reset_input_buffer()
 
+        if not homing_until_success(ser):
+            return
+
         commands = [
-            "$H",
             f"G1 Z{stepSize} F3000",
             "G92 Z0"
         ]
@@ -284,9 +281,11 @@ def init_devices(port="/dev/tty.usbmodem1201", baudrate=115200):
         time.sleep(2)
         ser.reset_input_buffer()
 
+        if not homing_until_success(ser):
+            return
+
         commands = [
-            "$H",
-            "M3 S90",  # Set spindle speed
+            "M3 S90"  # Set spindle speed
         ]
 
         for cmd in commands:
@@ -308,3 +307,21 @@ def init_devices(port="/dev/tty.usbmodem1201", baudrate=115200):
         if 'ser' in locals() and ser.is_open:
             ser.close()
             print("Serial connection closed.")
+
+def homing_until_success(ser, max_attempts=5):
+    for attempt in range(1, max_attempts + 1):
+        print(f">>> Attempt {attempt}: Sending $H")
+        ser.write(b"$H\n")
+        while True:
+            response = ser.readline().decode().strip()
+            if response:
+                print(f"<<< Received: {response}")
+            if "ok" in response.lower():
+                print("Homing successful.")
+                return True
+            if "homing fail" in response.lower():
+                print("Homing failed. Retrying...")
+                time.sleep(1)
+                break
+    print("Homing failed after all attempts.")
+    return False
