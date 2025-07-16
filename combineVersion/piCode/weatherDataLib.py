@@ -125,7 +125,7 @@ class WeatherGCodeWriter:
             f"--on M5 "
             f"--feedrate 3000 "
             f"--begin 'M3 S90\nG92 X0 Y0 Z0' "
-            f"--end 'G1 X0 Y0 Z0 F3000' "
+            f"--end 'G1 X0 Y0 Z0 F3000\nM3 S90' "
             f"-o ../gcodeOut/{gcode_file}"
         )
         print("[cargo]", cargo_cmd)
