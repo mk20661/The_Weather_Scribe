@@ -48,7 +48,7 @@ def init_header(date_override=None):
     paperRoll(stepSize=20, port=PORT)
     writer.write_header_to_svg(datetimeInput=header_date)
     send_gcode_to_arduino("../gcodeOut/daily_report_header.gcode", port=PORT)
-    paperRoll(stepSize=5, port=PORT)
+    paperRoll(stepSize=4, port=PORT)
 
 def run_hourly_task():
     global mqtt_data_entry, mqtt_received
