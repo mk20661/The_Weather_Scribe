@@ -47,7 +47,7 @@ class WeatherGCodeWriter:
         # Initialize PM2.5 sensor
         try:
             pm5003_reset_pin = None
-            pm5003_uart = serial.Serial("/dev/ttyUSB1", baudrate=9600, timeout=0.25)
+            pm5003_uart = serial.Serial("/dev/ttyUSB0", baudrate=9600, timeout=0.25)
             self.pm25 = PM25_UART(pm5003_uart, pm5003_reset_pin)
             print("PM2.5 sensor initialized.")
         except Exception as e:
