@@ -12,16 +12,21 @@ It is designed to be:
 
 ---
 ## 📷 Project Preview
-
+### Overview
 <p align="center">
 <img src="/ReadmeSrc/img/The Weather Scribe.jpg" width ="500">   
 </p>
 
+### Demonstration
 <p align="center">
   <video src="https://github.com/user-attachments/assets/0c971a71-63dc-440f-b4bb-f69c3ff8ddf2">
   </video>
-</p>
+</p> 
 
+### Output View
+<p align="center">
+<img src="./ReadmeSrc/img/Output.jpg" width ="500">   
+</p>
 ---
 
 ## 🎯 Key Features
