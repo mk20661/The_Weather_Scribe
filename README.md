@@ -108,5 +108,5 @@ It is designed to be:
 1. AKASHKUMAR (2024). DIY Pen Plotter Machine | Writing Machine. [online] Cults 3D. Available at: https://cults3d.com/en/3d-model/gadget/diy-pen-plotter-machine-writing-machine [Accessed 11 Jun. 2025].
 2. TuxSoft (2017). Drag Chain with mounts. [online] Thingiverse. Available at: https://www.thingiverse.com/thing:915487 [Accessed 11 Jul. 2025].
 3. Misosiru (2025). Raspberry pi 4 Model B case by misosiru MakerWorld: Download Free 3D Models. [online] Makerworld.com. Available at: https://makerworld.com/en/models/62316-raspberry-pi-4-model-b-case [Accessed 11 Jun. 2025].
-4.Olekhal (2024). Knob thumb Screw M2-M3-M4-M5-M6 socket. [online] Printables.com. Available at: https://www.printables.com/model/711250-knob-thumb-screw-m2-m3-m4-m5-m6-socket [Accessed 11 Jun. 2025].
+4. Olekhal (2024). Knob thumb Screw M2-M3-M4-M5-M6 socket. [online] Printables.com. Available at: https://www.printables.com/model/711250-knob-thumb-screw-m2-m3-m4-m5-m6-socket [Accessed 11 Jun. 2025].
 ```
