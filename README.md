@@ -18,9 +18,10 @@ It is designed to be:
 </p>
 
 <p align="center">
-  <video src="./ReadmeSrc/video/demo.mp4">
+  <video src="https://github.com/user-attachments/assets/0c971a71-63dc-440f-b4bb-f69c3ff8ddf2">
   </video>
 </p>
+
 ---
 
 ## 🎯 Key Features
