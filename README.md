@@ -103,7 +103,18 @@ It is designed to be:
 | Support for A Axis                     | [model/Support for the A axis.stl](./model/Support%20for%20the%20A%20axis.stl) | Structural support for horizontal arm   |
 ---
 
- ## Reference
+## 🔌 Circuit Connections
+### The Circuit Connection of the Writing Machine
+<p align="center">
+<img src="/ReadmeSrc/img/writingmachine.png" width ="800">   
+</p>
+
+### The Sensor Connection with Raspberry Pi 4B
+<p align="center">
+<img src="/ReadmeSrc/img/ciritut for pi 4.png" width ="800">   
+</p>
+
+## Reference
  ```
 1. AKASHKUMAR (2024). DIY Pen Plotter Machine | Writing Machine. [online] Cults 3D. Available at: https://cults3d.com/en/3d-model/gadget/diy-pen-plotter-machine-writing-machine [Accessed 11 Jun. 2025].
 2. TuxSoft (2017). Drag Chain with mounts. [online] Thingiverse. Available at: https://www.thingiverse.com/thing:915487 [Accessed 11 Jul. 2025].
