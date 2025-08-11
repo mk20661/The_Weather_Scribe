@@ -1,7 +1,10 @@
-# 🖋️ The Weather Scribe
+# 🖋️ The Weather Scribe  
 ---
 
 ## 🌦️ Project Description
+<p align="center">
+<img src="/ReadmeSrc/img/The Weather Scribe.jpg" width ="500">   
+</p>  
 
 **The Weather Scribe** ‘writes’ data, updating the weather and air quality data every hour and completing a full daily weather report in text on paper. The system combines motor control with a mechanical structure to automate the writing process. It is equipped with a paper feeding mechanism that automatically advances the paper after each section is completed. The project presents digital ecological data through physical writing to enhance public awareness and understanding of climate and environmental changes.
 
