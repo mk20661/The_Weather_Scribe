@@ -114,10 +114,75 @@ It is designed to be:
 <img src="/ReadmeSrc/img/ciritut for pi 4.png" width ="800">   
 </p>
 
+## 🔧 Installation Instructions on Raspberry Pi 4B
+After connecting all circuits and assemble all the components, follow the steps below to set up and run **The Weather Scribe** on a Raspberry Pi 4 Model B.
+### 📦  System Requirements
+
+- Raspberry Pi 4B (2GB or more)
+- Raspberry Pi OS (Bookworm or Bullseye, 64-bit recommended)
+- Internet connection (for API and MQTT)
+- Python 3.9+
+
+### 🧬 Clone the Repository
+```
+git clone https://github.com/mk20661/The_Weather_Scribe.git
+cd The_Weather_Scribe
+```
+
+### 🧪 Create Python Virtual Environment
+```bash
+cd The_Weather_Scribe
+python3 -m venv weather_scribe_env
+source weather_scribe_env/bin/activate
+```
+### 🦀 Install Rust and Cargo on Raspberry Pi
+
+To compile `svg2gcode`, Rust and Cargo are required. Follow the steps below to install:
+
+```bash
+curl https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+cargo --version
+```
+### 📦 Install Python Dependencies
+```
+cd The_Weather_Scribe/main/piCode
+pip install -r requirements.txt
+```
+### 📦 Install svg2gcode-cli
+This tool is based on the [`svg2gcode`](https://github.com/sameer/svg2gcode) project by [sameer](https://github.com/sameer), which converts SVG files into G-code for CNC plotting.  
+```
+cargo install svg2gcode-cli
+```
+### ✨ Run the script
+```
+cd The_Weather_Scribe/main/piCode
+python main.py
+```
+### ✨Enable startup script for booting up
+``` bash
+# write the startup script
+nano writingMachine_start.sh
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export CARGO_HOME="$HOME/.cargo"
+cd The_Weather_Scribe # entry the location of clone
+source weather_scribe_env/bin/activate # entry the path for installing the virtual environment
+python main.py >> /home/pi/startup.log 2>&1
+
+# Save the script and then grant authority to the script
+chmod +x /home/pi/writingMachine_start.sh
+
+# Set up the startup through crontab
+crontab -e
+# Add at the last line
+@reboot /home/pi/writingMachine_start.sh>> /home/pi/startup.log 2>&1
+```
 ## Reference
  ```
 1. AKASHKUMAR (2024). DIY Pen Plotter Machine | Writing Machine. [online] Cults 3D. Available at: https://cults3d.com/en/3d-model/gadget/diy-pen-plotter-machine-writing-machine [Accessed 11 Jun. 2025].
 2. TuxSoft (2017). Drag Chain with mounts. [online] Thingiverse. Available at: https://www.thingiverse.com/thing:915487 [Accessed 11 Jul. 2025].
 3. Misosiru (2025). Raspberry pi 4 Model B case by misosiru MakerWorld: Download Free 3D Models. [online] Makerworld.com. Available at: https://makerworld.com/en/models/62316-raspberry-pi-4-model-b-case [Accessed 11 Jun. 2025].
 4. Olekhal (2024). Knob thumb Screw M2-M3-M4-M5-M6 socket. [online] Printables.com. Available at: https://www.printables.com/model/711250-knob-thumb-screw-m2-m3-m4-m5-m6-socket [Accessed 11 Jun. 2025].
+5. Sameer (2024). GitHub - sameer/svg2gcode: Convert vector graphics to g-code for pen plotters, laser engravers, and other CNC machines. [online] GitHub. Available at: https://github.com/sameer/svg2gcode [Accessed 8 Jul. 2025].
 ```

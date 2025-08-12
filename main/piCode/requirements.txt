@@ -1,8 +1,8 @@
 adafruit-blinka
 RPi.GPIO
-borad
+board
 adafruit-circuitpython-sgp30
 paho-mqtt
 vpype
-serial
-pip install adafruit-circuitpython-pm25
+pyserial
+adafruit-circuitpython-pm25
