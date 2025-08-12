@@ -73,7 +73,8 @@ It is designed to be:
 | Part Name                | Source Link                                      | Note
 |--------------------------|--------------------------------------------------| -------------|
 | Drag Chain Segment       | [Thingiverse](https://www.thingiverse.com/thing:915487) | Hide the wires|
-| Chain Mount Bracket      | ↑ same                                           |
+| Chain Mount Bracket      | ↑ same                                           | ↑ same                                           |
+
 
 ##### 🔹 Model from MakerWorld (by THEMAKERGUY)
 
