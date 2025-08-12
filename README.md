@@ -70,9 +70,9 @@ It is designed to be:
 
 ##### 🔹 Models from Thingiverse (by Skimbal)
 
-| Part Name                | Source Link                                      |
-|--------------------------|--------------------------------------------------|
-| Drag Chain Segment       | [Thingiverse](https://www.thingiverse.com/thing:915487) |
+| Part Name                | Source Link                                      | Note
+|--------------------------|--------------------------------------------------| -------------|
+| Drag Chain Segment       | [Thingiverse](https://www.thingiverse.com/thing:915487) | Hide the wires|
 | Chain Mount Bracket      | ↑ same                                           |
 
 ##### 🔹 Model from MakerWorld (by THEMAKERGUY)
