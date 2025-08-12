@@ -97,7 +97,7 @@ It is designed to be:
 | Roller End Cap (Paper Collection)      | [model/Roller end cap for paper collection part.stl](./model/Roller%20end%20cap%20for%20paper%20collection%20part.stl) | Supports paper take-up roller   |
 | Roller End Cap (Roll Paper)            | [model/Roller end cap for roll paper.stl](model/Roller%20end%20cap%20for%20roll%20paper.stl) | For feed roller ends             |
 | Sliders for A Axis                     | [model/Sliders for the A axis.stl](./model/Sliders%20for%20the%20A%20axis.stl) | Linear guide slider for writing arm     |
-| Stepper Motor Support (A Axis)         | [model/Stepper motor support for A axis.stl](./model/Stepper%20motor%20support%20for%20A%20axis.stl) | Motor mounting bracket         |
+| Stepper Motor Support (Axis)         | [model/Stepper motor support for A axis.stl](./model/Stepper%20motor%20support%20for%20A%20axis.stl) | Motor mounting bracket         |
 | Support for Paper Collection           | [model/Support for paper collection part.stl](./model/Support%20for%20paper%20collection%20part.stl) | Holds roller below writing surface      |
 | Support for Roll Paper                 | [model/Support for roll paper.stl](./model/Support%20for%20roll%20paper.stl) | Base for holding paper feed roll        |
 | Support for A Axis                     | [model/Support for the A axis.stl](./model/Support%20for%20the%20A%20axis.stl) | Structural support for horizontal arm   |
