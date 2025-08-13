@@ -115,6 +115,67 @@ It is designed to be:
 <img src="/ReadmeSrc/img/ciritut for pi 4.png" width ="800">   
 </p>
 
+## 💾 Upload GRBL Firmware to Arduino Uno 
+After connecting all circuits and assemble all the components, follow the steps below to   upload **GRBL** firmware to Arduino Uno. 
+### 📦 1. Install Arduino IDE
+Download and install the Arduino IDE from the [official website](https://www.arduino.cc/en/software)
+
+### 🔧 2. Add GRBL Library
+This project already includes the path of GRBL firmware source in: **GRBL/grbl**
+
+To make this library available to the Arduino IDE:
+
+1. Locate the path above in File Explorer  
+2. Copy the entire `grbl` folder  
+3. Paste it into your Arduino libraries folder, typically located at: Documents\Arduino\libraries\
+
+
+After copying, your structure should look like:
+
+```
+Documents\Arduino\libraries\grbl
+|- config.h
+|- cpu_map.h
+|- grbl.h
+|- ...
+```
+
+### 🛠️ 3. Upload GRBL Firmware to Arduino Uno
+
+1. Launch the **Arduino IDE**  
+2. Go to: File → Examples → grbl → grblUpload
+3. Select the correct board and port:
+```
+Tools → Board: Arduino Uno
+Tools → Port: COMx (your Arduino's COM port)
+```
+4. Click the **Upload** button (✔️)
+
+Once complete, the Arduino Uno will be flashed with GRBL firmware and ready to accept G-code commands via serial.
+
+---
+
+### ✅ 4.Verify GRBL Installation
+
+1. Open the **Serial Monitor** (top-right magnifying glass icon)  
+2. Set the **baud rate to 115200**  
+3. You should see, like this:
+
+```
+Grbl 0.9h ['$' for help]
+```
+
+### ⚙️ 5. Configure GRBL Settings via Serial Monitor
+This project includes a GRBL configuration file located at: **GRBL/GRBL Config.txt**
+
+```
+Each line in this file is a GRBL setting command, such as:
+$0=10 (step pulse, usec)
+$1=25 (step idle delay, msec)
+$2=0 (step port invert mask:00000000)
+$3=3 (dir port invert mask:00000011)
+.....
+```
 ## 🔧 Installation Instructions on Raspberry Pi 4B
 After connecting all circuits and assemble all the components, follow the steps below to set up and run **The Weather Scribe** on a Raspberry Pi 4 Model B.
 ### 📦  System Requirements
