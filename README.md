@@ -160,7 +160,7 @@ cargo install svg2gcode-cli
 cd The_Weather_Scribe/main/piCode
 python main.py
 ```
-### ✨Enable startup script for booting up
+### ✨ Enable startup script for booting up
 ``` bash
 # write the startup script
 nano writingMachine_start.sh
@@ -179,6 +179,12 @@ crontab -e
 # Add at the last line
 @reboot /home/pi/writingMachine_start.sh>> /home/pi/startup.log 2>&1
 ```
+
+### 🔄 Workflow
+<p align="center">
+<img src="/ReadmeSrc/img/workflow.jpg">   
+</p>
+
 ## Reference
  ```
 1. AKASHKUMAR (2024). DIY Pen Plotter Machine | Writing Machine. [online] Cults 3D. Available at: https://cults3d.com/en/3d-model/gadget/diy-pen-plotter-machine-writing-machine [Accessed 11 Jun. 2025].
