@@ -117,6 +117,8 @@ It is designed to be:
 <img src="/ReadmeSrc/img/ciritut for pi 4.png" width ="800">   
 </p>
 
+### After these two circuit connection finishing, use the arduino uno cable to connect between Arduino UNO and Raspberry Pi
+
 ## 💾 Upload GRBL Firmware to Arduino Uno 
 After connecting all circuits and assemble all the components, follow the steps below to   upload **GRBL** firmware to Arduino Uno. 
 ### 📦 1. Install Arduino IDE
