@@ -224,6 +224,19 @@ This tool is based on the [`svg2gcode`](https://github.com/sameer/svg2gcode) pro
 ```
 cargo install svg2gcode-cli
 ```
+
+### 📦 Create the `mqttConfig.py` 
+``` bash
+# Make sure to create mqttConfig.py in the ame directory as main.py.  
+cd The_Weather_Scribe/main/piCode
+nano mqttConfig.py 
+# copy and paste below code, and blank your own mqtt config
+BROKER = ""    # your own broker address
+PORT =         # your own port of mqtt
+USERNAME = ""  # your MQTT username (if required)
+PASSWORD = ""  # your MQTT password (if required)
+TOPIC = ""     # topic to publish/subscribe
+```
 ### ✨ Run the script
 ```
 cd The_Weather_Scribe/main/piCode
