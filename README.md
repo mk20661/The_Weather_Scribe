@@ -106,7 +106,7 @@ It is designed to be:
 | Support for Roll Paper                 | [model/Support for roll paper.stl](./model/Support%20for%20roll%20paper.stl) | Base for holding paper feed roll        |
 | Support for A Axis                     | [model/Support for the A axis.stl](./model/Support%20for%20the%20A%20axis.stl) | Structural support for horizontal arm   |
 
-#### The main structure (eg.X/Y frame, sliders, pen holder, motor mounts) can be assembled by following the [video](https://www.youtube.com/watch?v=w1urQnTpvn0) of Creativity Buzz. Additional parts designed for this project—such as sensor mounts, paper rollers, and supports—can be installed according to their positions in the final build [photo]([./ReadmeSrc/img/The%20Weather%20Scribe.jpg](https://github.com/mk20661/The_Weather_Scribe/blob/main/ReadmeSrc/img/The%20Weather%20Scribe.jpg))
+#### The main structure (eg.X/Y frame, sliders, pen holder, motor mounts) can be assembled by following the [video](https://www.youtube.com/watch?v=w1urQnTpvn0) of Creativity Buzz. Additional parts designed for this project—such as sensor mounts, paper rollers, and supports—can be installed according to their positions in the final build [photo](https://github.com/mk20661/The_Weather_Scribe/blob/main/ReadmeSrc/img/The%20Weather%20Scribe.jpg)
 
 ---
 
